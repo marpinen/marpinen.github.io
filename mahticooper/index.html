@@ -72,8 +72,8 @@
 
 			let start_button = document.getElementById("start-button");
 			start_button.innerHTML = "Reset";
-			start_button.removeEventListener("ontouchend", startTimer);
-			start_button.addEventListener("ontouchend", reset);
+			start_button.removeEventListener("click", startTimer);
+			start_button.addEventListener("click", reset);
 		}
 
 
@@ -102,8 +102,8 @@
             location.reload();
         }
 		
-        document.getElementById("start-button").addEventListener("ontouchend", startTimer);
-		document.getElementById("lap-button").addEventListener("ontouchend", addLap); 
+        document.getElementById("start-button").addEventListener("click", startTimer);
+		document.getElementById("lap-button").addEventListener("click", addLap); 
 		
     </script>
 </body>

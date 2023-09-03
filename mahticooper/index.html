@@ -74,6 +74,8 @@
 			start_button.innerHTML = "Reset";
 			start_button.removeEventListener("click", startTimer);
 			start_button.addEventListener("click", reset);
+			start_button.removeEventListener("touchstart", startTimer);
+			start_button.addEventListener("touchstart", reset);
 		}
 
 
@@ -101,13 +103,13 @@
         function reset() {
             location.reload();
         }
-		<!--
+		
         document.getElementById("start-button").addEventListener("click", startTimer);
 		document.getElementById("lap-button").addEventListener("click", addLap); 
-		//-->
+		
 		document.getElementById("start-button").addEventListener("touchstart", startTimer);		
 		document.getElementById("lap-button").addEventListener("touchstart", addLap);
-
+		
 
     </script>
 </body>

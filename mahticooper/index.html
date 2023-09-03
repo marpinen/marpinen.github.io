@@ -19,7 +19,7 @@
 		}
 		button {
 			font-size: 1em;
-			padding: 10px 20px;
+			padding: 20px 20px;
 		}
 		#timer {
 			font-size: 2em;
@@ -47,29 +47,36 @@
 
     <script>
         let track_length = 337;
-        let time = 12 * 60;
+        let time = 0.2 * 60;
         let lap_times = [];
         let last_lap_time = time;
         let timer_running = false;
 
         function startTimer() {
-            timer_running = true;
-            let timer = setInterval(function() {
-                time--;
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-                document.getElementById("timer").innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-                if (time === 0) {
-                    clearInterval(timer);
-                    timer_running = false;
-                }
-            }, 1000);
+			timer_running = true;
+			let timer = setInterval(function() {
+				time--;
+				let minutes = Math.floor(time / 60);
+				let seconds = time % 60;
+				document.getElementById("timer").innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+				if (time === 0) {
+					clearInterval(timer);
+					timer_running = false;
 
-            let start_button = document.getElementById("start-button");
-            start_button.innerHTML = "Reset";
-            start_button.removeEventListener("click", startTimer);
-            start_button.addEventListener("click", reset);
-        }
+					// Display the distance of the full laps
+					let full_laps_distance = lap_times.length * track_length;
+					let full_laps_text = document.createElement("p");
+					full_laps_text.innerHTML = `The distance of the full laps: ${full_laps_distance} m.<br>Measure the length of the last lap!`;
+					document.body.appendChild(full_laps_text);
+				}
+			}, 1000);
+
+			let start_button = document.getElementById("start-button");
+			start_button.innerHTML = "Reset";
+			start_button.removeEventListener("click", startTimer);
+			start_button.addEventListener("click", reset);
+		}
+
 
         function addLap() {
             if (!timer_running) return;

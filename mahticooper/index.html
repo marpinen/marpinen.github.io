@@ -45,7 +45,7 @@
 
     <script>
         let track_length = 337;
-        let time = 12 * 60;
+        let time = 1 * 60;
         let lap_times = [];
         let last_lap_time = time;
         let timer_running = false;
@@ -103,7 +103,11 @@
         }
 
         document.getElementById("start-button").addEventListener("click", startTimer);
-        document.getElementById("lap-button").addEventListener("click", addLap);
+		document.getElementById("start-button").addEventListener("touchstart", startTimer);
+		document.getElementById("lap-button").addEventListener("click", addLap);
+		document.getElementById("lap-button").addEventListener("touchstart", addLap);
+
+
     </script>
 </body>
 </html>

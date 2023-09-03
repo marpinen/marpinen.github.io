@@ -49,11 +49,8 @@
         let lap_times = [];
         let last_lap_time = time;
         let timer_running = false;
-		let timer_started = false;
 
 		function startTimer() {
-			if (timer_started) return;
-			timer_started = true;
 			timer_running = true;
 			track_length = document.getElementById("track-length").value; // Update track_length based on user input
 			let timer = setInterval(function() {

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Cooper test distance predictor</title>
@@ -25,11 +24,16 @@
 		}
 		#timer {
 			font-size: 2em;
+		
+		}
+		#lap-timer {
+			font-size: 1em;
+		
 		}
 		#track-length {
 			font-size: 1em;
 			width: 10%;
-		}	
+		}
     </style>
 </head>
 <body>
@@ -37,8 +41,10 @@
     <input type="number" id="track-length" value="337"><br><br>
 
     <div id="timer">12:00</div><br>
+    <div id="lap-timer">( 00:00 )</div><br>
 
     <button id="start-button">Start</button>
+    <button id="reset-button" style="display: none;">Reset</button>
     <button id="lap-button">Lap +1</button><br><br>
 
     <ol id="lap-list"></ol>
@@ -46,6 +52,7 @@
     <script>
         let track_length = 337;
         let time = 12 * 60;
+        let lap_time = 0;
         let lap_times = [];
         let last_lap_time = time;
         let timer_running = false;
@@ -55,9 +62,13 @@
 			track_length = document.getElementById("track-length").value; // Update track_length based on user input
 			let timer = setInterval(function() {
 				time--;
+				lap_time++;
 				let minutes = Math.floor(time / 60);
 				let seconds = time % 60;
 				document.getElementById("timer").innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+				minutes = Math.floor(lap_time / 60);
+				seconds = lap_time % 60;
+				document.getElementById("lap-timer").innerHTML = `( ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")} )`;
 				if (time === 0) {
 					clearInterval(timer);
 					timer_running = false;
@@ -71,9 +82,9 @@
 			}, 1000);
 
 			let start_button = document.getElementById("start-button");
-			start_button.innerHTML = "Reset";
-			start_button.removeEventListener("click", startTimer);
-			start_button.addEventListener("click", reset);
+			start_button.style.display = "none";
+			let reset_button = document.getElementById("reset-button");
+			reset_button.style.display = "inline-block";
 		}
 
 
@@ -82,20 +93,23 @@
 
             lap_times.push(time);
             let lap_list = document.getElementById("lap-list");
-            let lap_time = document.createElement("li");
+            let lap_time_element = document.createElement("li");
             let lap_duration = last_lap_time - time;
             last_lap_time = time;
             let minutes = Math.floor(lap_duration / 60);
             let seconds = lap_duration % 60;
-            lap_time.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-            lap_list.appendChild(lap_time);
+            lap_time_element.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            lap_list.appendChild(lap_time_element);
 
             let distance_prediction = document.createElement("span");
             let average_lap_time = (12 * 60 - time) / lap_times.length;
             let predicted_laps = time / average_lap_time;
             let predicted_distance = (predicted_laps + lap_times.length) * track_length;
             distance_prediction.innerHTML = ` Predicted distance: ${Math.round(predicted_distance)} m`;
-            lap_time.appendChild(distance_prediction);
+            lap_time_element.appendChild(distance_prediction);
+
+            // Reset the lap timer
+            lap_time = 0;
         }
 
         function reset() {
@@ -103,8 +117,9 @@
         }
 		
         document.getElementById("start-button").addEventListener("click", startTimer);
-		document.getElementById("lap-button").addEventListener("click", addLap); 
-		
+        document.getElementById("lap-button").addEventListener("click", addLap);
+        document.getElementById("reset-button").addEventListener("click", reset);
     </script>
 </body>
+
 </html>

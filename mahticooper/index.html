@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <label for="track-length">Track length (m): </label>
+    <label for="track-length">Track length (mi): </label>
     <input type="number" id="track-length" value="337"><br><br>
 
     <div id="timer">12:00</div><br>
@@ -119,6 +119,9 @@
         document.getElementById("start-button").addEventListener("click", startTimer);
         document.getElementById("lap-button").addEventListener("click", addLap);
         document.getElementById("reset-button").addEventListener("click", reset);
+        document.getElementById("start-button").addEventListener("touchstart", startTimer);
+        document.getElementById("lap-button").addEventListener("touchstart", addLap);
+        document.getElementById("reset-button").addEventListener("touchstart", reset);
     </script>
 </body>
 

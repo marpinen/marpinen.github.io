@@ -117,6 +117,9 @@
         }
        
         function handleEvent(event) {
+            if (event.type === "touchend") {
+                event.preventDefault();
+            }
             if (event.target.id === "start-button") {
                 startTimer();
             } else if (event.target.id === "lap-button") {
@@ -127,8 +130,8 @@
         }
 
         document.addEventListener("click", handleEvent);
-        document.addEventListener("touchstart", handleEvent);
-		    
+        document.addEventListener("touchend", handleEvent);
+    
         /*
         document.getElementById("start-button").addEventListener("click", startTimer);
         document.getElementById("lap-button").addEventListener("click", addLap);

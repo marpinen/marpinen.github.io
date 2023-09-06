@@ -130,7 +130,7 @@
        
         /* fix for preventing double presses on mobile */
         function handleEvent(event) {
-            if (event.type === "touchend") {
+            if (event.type === "touchend" && event.target.tagName !== "INPUT") {
                 event.preventDefault();
             }
             if (event.target.id === "start-button") {
@@ -144,7 +144,7 @@
 
         document.addEventListener("click", handleEvent);
         document.addEventListener("touchend", handleEvent);
-    
+        
     </script>
 </body>
 

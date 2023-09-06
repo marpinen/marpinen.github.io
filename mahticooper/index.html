@@ -116,6 +116,7 @@
             location.reload();
         }
        
+        /* fix for preventing double presses on mobile */
         function handleEvent(event) {
             if (event.type === "touchend") {
                 event.preventDefault();
@@ -132,14 +133,6 @@
         document.addEventListener("click", handleEvent);
         document.addEventListener("touchend", handleEvent);
     
-        /*
-        document.getElementById("start-button").addEventListener("click", startTimer);
-        document.getElementById("lap-button").addEventListener("click", addLap);
-        document.getElementById("reset-button").addEventListener("click", reset);
-        document.getElementById("start-button").addEventListener("touchstart", startTimer);
-        document.getElementById("lap-button").addEventListener("touchstart", addLap);
-        document.getElementById("reset-button").addEventListener("touchstart", reset);
-         */
     </script>
 </body>
 

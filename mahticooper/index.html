@@ -1,3 +1,7 @@
+<!-- A quick tool for counting laps indoors (no GPS) for other runners and 
+predicting the run distance of the 12 min Cooper test, optimized for mobile use.
+The default odd track length is for Kuopio-halli. 
+-->
 <html>
 <head>
     <title>Cooper test distance predictor</title>
@@ -32,20 +36,8 @@
 		}
 		#track-length {
 			font-size: 1em;
-			width: 14%;
+			width: 10%;
 		}
-      
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
     </style>
 </head>
 <body>
@@ -56,7 +48,6 @@
     <div id="lap-timer">( 00:00 )</div><br>
 
     <button id="start-button">Start</button>
-    <button id="reset-button" style="display: none;">Reset</button>
     <button id="lap-button">Lap +1</button><br><br>
 
     <ol id="lap-list"></ol>
@@ -94,9 +85,9 @@
 			}, 1000);
 
 			let start_button = document.getElementById("start-button");
-			start_button.style.display = "none";
-			let reset_button = document.getElementById("reset-button");
-			reset_button.style.display = "inline-block";
+			start_button.innerHTML = "Reset";
+			start_button.removeEventListener("click", startTimer);
+			start_button.addEventListener("click", reset);
 		}
 
 
@@ -127,25 +118,9 @@
         function reset() {
             location.reload();
         }
-       
-        /* fix for preventing double presses on mobile */
-        function handleEvent(event) {
-            if (event.type === "touchend" && event.target.tagName !== "INPUT") {
-                event.preventDefault();
-            }
-            if (event.target.id === "start-button") {
-                startTimer();
-            } else if (event.target.id === "lap-button") {
-                addLap();
-            } else if (event.target.id === "reset-button") {
-                reset();
-            }
-        }
-
-        document.addEventListener("click", handleEvent);
-        document.addEventListener("touchend", handleEvent);
-
+		
+        document.getElementById("start-button").addEventListener("click", startTimer);
+        document.getElementById("lap-button").addEventListener("click", addLap); 	
     </script>
 </body>
-
 </html>

@@ -9,6 +9,7 @@ The default odd track length is for Kuopio-halli.
         body {
             text-align: center;
 			font-size: 4vw;
+            font-family: Arial, Helvetica, sans-serif;
         }
         #lap-list {
             list-style-type: decimal;
@@ -24,7 +25,8 @@ The default odd track length is for Kuopio-halli.
 			-webkit-appearance: none;
 			font-size: 1em;
 			padding: 1.2em 1.2em;
-			color: #000
+			color: #000;
+            font-family: inherit;
 		}
 		#timer {
 			font-size: 2em;
@@ -41,6 +43,8 @@ The default odd track length is for Kuopio-halli.
     </style>
 </head>
 <body>
+    <h1>Cooper test distance estimator</h1>
+    Start the timer and press Lap +1 on each full lap. Shows you the estimated final result of the runner. Measure the last incomplete lap distance and add that to full laps. Optimized for mobile devices.<br><br>
     <label for="track-length">Track length (m): </label>
     <input type="number" id="track-length" value="337"><br><br>
 
@@ -54,7 +58,7 @@ The default odd track length is for Kuopio-halli.
 
     <script>
         let track_length = 337;
-        let time = 12 * 60;
+        let time = 12 * 60; // 12 min
         let lap_time = 0;
         let lap_times = [];
         let last_lap_time = time;
@@ -79,7 +83,7 @@ The default odd track length is for Kuopio-halli.
 					// Display the distance of the full laps
 					let full_laps_distance = lap_times.length * track_length;
 					let full_laps_text = document.createElement("p");
-					full_laps_text.innerHTML = `The distance of the full laps: ${full_laps_distance} m.<br>Measure the length of the last lap!`;
+					full_laps_text.innerHTML = `The distance of the full laps: ${full_laps_distance} m.<br>Measure the distance of the last lap!`;
 					document.body.appendChild(full_laps_text);
 				}
 			}, 1000);
